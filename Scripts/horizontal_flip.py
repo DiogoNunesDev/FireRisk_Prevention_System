@@ -13,8 +13,7 @@ for filename in os.listdir(input_folder):
     
     if filename.endswith(('.jpg', '.jpeg', '.png', '.bmp', '.avif', '.JPG')):
         input_image_path = os.path.join(input_folder, filename)
-        base = filename.split('.')[0]
-        filename = base + '_V.jpg'
+        filename = filename.split('.')[0]  + '_H.jpg'
         output_image_path = os.path.join(output_folder, filename)  
         original_image = Image.open(input_image_path)
         

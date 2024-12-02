@@ -1,16 +1,16 @@
 import os
 import json
 
-#input_folder = "../Labels/Original"
+input_folder = "../Labels/Original"
 #input_folder = "../Labels/Horizontal_Flip"
 #output_folder = "../Labels/Horizontal_Flip"
-output_folder = "../Labels/H_V_Flip"
-#output_folder = "../Labels/Vertical_Flip"
+#output_folder = "../Labels/H_V_Flip"
+output_folder = "../Labels/Vertical_Flip"
 
 os.makedirs(output_folder, exist_ok=True)
 
-image_width = 1920  
-image_height = 1080  
+image_width = 896  
+image_height = 512  
 
 def flip_horizontal(points, image_width):
     return [[image_width - x, y] for x, y in points]
@@ -21,7 +21,7 @@ def flip_vertical(points, image_height):
 for filename in os.listdir(input_folder):
     if filename.endswith('.json'):
         input_json_path = os.path.join(input_folder, filename)
-        filename = filename.split('.')[0] + '_H_V.json'
+        filename = filename.split('.')[0] + '_V.json'
         output_json_path = os.path.join(output_folder, filename)  
         
         with open(input_json_path, 'r') as f:
@@ -30,7 +30,7 @@ for filename in os.listdir(input_folder):
         for shape in data['shapes']:
             if 'points' in shape:
                 
-                shape['points'] = flip_horizontal(shape['points'], image_width)
+                #shape['points'] = flip_horizontal(shape['points'], image_width)
                 
                 shape['points'] = flip_vertical(shape['points'], image_height)
         
