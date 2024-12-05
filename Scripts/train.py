@@ -6,9 +6,12 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 import cv2
-from model3 import unet
+from unet import unet
+from unet2 import unet as unet_v2
+from DIResUnet import diResUnet
 import matplotlib.pyplot as plt
 
+tf.keras.backend.clear_session()
 # GPU Setup
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
@@ -17,10 +20,12 @@ if gpus:
 
 # Constants
 input_shape = (512, 896, 3) 
-n_labels = 6
-batch_size = 2
+n_labels = 5
+batch_size = 1
 epochs = 400
-learning_rate = 0.001
+learning_rate =1e-4
+class_weights = tf.constant([0.0589, 0.0492, 0.0063, 0.7062, 0.1794], dtype=tf.float32)
+
 
 # Data Preparation
 def load_data(images_path, masks_path, image_size):
@@ -40,6 +45,7 @@ def load_data(images_path, masks_path, image_size):
 
     images = np.array(images, dtype=np.float32) / 255.0
     masks = np.array(masks, dtype=np.int32)
+    masks = masks - 1
 
     masks = np.expand_dims(masks, axis=-1)
     masks = to_categorical(masks, num_classes=n_labels)
@@ -51,7 +57,24 @@ X, y = load_data(images_path, masks_path, (input_shape[1], input_shape[0]))
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42)
 
 # Model Setup
-model = unet(input_shape=input_shape, num_classes=n_labels)
+model = diResUnet(input_shape=input_shape, num_classes=n_labels)
+#model = unet_v2(input_shape=input_shape, num_classes=n_labels)
+#model = unet(input_shape=input_shape, num_classes=n_labels)
+
+def weighted_categorical_crossentropy(class_weights):
+    def loss(y_true, y_pred):
+        y_true = tf.reshape(y_true, (-1, n_labels))
+        y_pred = tf.reshape(y_pred, (-1, n_labels))
+
+        ce_loss = tf.reduce_sum(y_true * -tf.math.log(y_pred + 1e-7), axis=-1)
+        
+        weight = tf.reduce_sum(y_true * class_weights, axis=-1)
+        weighted_loss = ce_loss * weight
+
+        return tf.reduce_mean(weighted_loss)
+    
+    return loss
+
 
 def iou_metric(y_true, y_pred):
     smooth = 1e-6
@@ -62,11 +85,12 @@ def iou_metric(y_true, y_pred):
     iou = (intersection + smooth) / (union + smooth)
     return tf.reduce_mean(iou)
 
-model.compile(optimizer=Adam(learning_rate=learning_rate), loss='categorical_crossentropy', metrics=['accuracy', iou_metric])
+model.compile(optimizer=Adam(learning_rate=learning_rate), loss=weighted_categorical_crossentropy(class_weights), metrics=['accuracy', iou_metric])
 
 # Callbacks
 checkpoint = ModelCheckpoint('unet_best_model.h5', monitor='val_loss', save_best_only=True, verbose=1)
 early_stopping = EarlyStopping(patience=50, verbose=1)
+reduce_on_plateau = tf.keras.callbacks.ReduceLROnPlateau(monitor="val_accuracy", factor=0.2, patience=5, verbose=1, mode="max", min_lr=1e-6)
 
 # Training
 history = model.fit(
@@ -75,7 +99,7 @@ history = model.fit(
     steps_per_epoch=len(X_train) // batch_size,
     validation_steps=len(X_val) // batch_size,
     epochs=epochs,
-    callbacks=[checkpoint, early_stopping],
+    callbacks=[checkpoint, early_stopping, reduce_on_plateau],
     verbose=1
 )
 
