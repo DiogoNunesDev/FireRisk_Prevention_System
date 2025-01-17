@@ -27,7 +27,7 @@
 
 The U-Net model was chosen for its exceptional performance in image segmentation tasks. Here's a high-level view of the architecture:
 
-![U-Net Model Architecture](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/UNet%20Architecture.jpg)
+![U-Net Model Architecture](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/readme/UNet%20Architecture.jpg)
 
 ### Why U-Net?
 
