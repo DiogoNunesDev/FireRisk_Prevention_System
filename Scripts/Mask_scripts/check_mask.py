@@ -3,12 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 CLASS_COLORS = {
-    1: (255, 0, 0),         # Road (Red)
-    2: (0, 255, 0),         # Building (Green)
-    3: (0, 0, 255),         # Vegetation (Blue)
-    4: (0, 255, 255),       # Material (Yellow)
-    5: (255, 255, 0),       # Water (Cyan)
-    0: (0, 0, 0),           # Unassigned (Black)
+    #Format: BLUE | GREEN | RED 
+    1: (19, 69, 139),     # Road 
+    2: (240, 32, 160),      # Building
+    3: (0, 255, 0),     # Vegetation
+    4: (0, 255, 255),       # Material 
+    5: (255, 0, 0),       # Water 
+    0: (0, 0, 0),           # Unassigned 
 }
 
 def create_colored_mask(mask):
@@ -51,8 +52,8 @@ def display_images(image_path, mask_path):
     plt.show()
 
 # Example usage:
-image_path = '../../Data/Full/Image_35.jpg'   # Path to the input image
-mask_path = '../../Masks/Mask_35.png'         # Path to the corresponding mask
+image_path = '../../Data/Full/Image_1.jpg'   # Path to the input image
+mask_path = '../../Masks/Mask_1.png'         # Path to the corresponding mask
 
 # Call the function
 display_images(image_path, mask_path)
