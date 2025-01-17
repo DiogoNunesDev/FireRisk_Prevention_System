@@ -16,10 +16,10 @@
 ## 🔎 Results Showcase
 
 ### Aerial Image Input
-![Input Example](https://via.placeholder.com/600x300)
+![Input Example](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/Test/test.jpg)
 
-### Predicted Risk Zone Output
-![Output Example](https://via.placeholder.com/600x300)
+### Prediction
+![Output Example](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/Test/output.jpg)
 
 ---
 
