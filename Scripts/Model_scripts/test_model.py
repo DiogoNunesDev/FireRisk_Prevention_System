@@ -15,7 +15,7 @@ CLASS_MAP = {
 
 # Paths
 model_path = "../unet_final_model.h5" 
-image_path = "../../Data/Full/Image_63.jpg" 
+image_path = "../../Test/test.jpg" 
 
 input_shape = (512, 896, 3)
 alpha = 0.6
@@ -32,13 +32,14 @@ class_colors = [
 model = load_model(model_path, compile=False)
 
 image = cv2.imread(image_path)
-original_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  
+original_image = cv2.resize(image, (input_shape[1], input_shape[0])) 
 image = cv2.resize(image, (input_shape[1], input_shape[0])) 
 image = image / 255.0  
 image = np.expand_dims(image, axis=0)  
 
 pred = model.predict(image)[0] 
 pred_mask = np.argmax(pred, axis=-1)  # Getting the class with the highest probability
+
 
 # Creating the overlay
 overlay = np.zeros_like(original_image, dtype=np.uint8)
@@ -47,7 +48,7 @@ for class_idx, color in enumerate(class_colors):
 
 # Blending the original image with the overlay
 blended = cv2.addWeighted(original_image, 1 - alpha, overlay, alpha, 0)
-cv2.imwrite("output.jpg", cv2.cvtColor(blended, cv2.COLOR_RGB2BGR))
+cv2.imwrite("../../Test/output.jpg", cv2.cvtColor(blended, cv2.COLOR_RGB2BGR))
 
 plt.figure(figsize=(15, 5))
 plt.subplot(1, 3, 1)
