@@ -117,8 +117,7 @@ reduce_on_plateau = tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", fac
 history = model.fit(
     X_train, y_train,
     validation_data=(X_val, y_val),
-    steps_per_epoch=len(X_train) // batch_size,
-    validation_steps=len(X_val) // batch_size,
+
     epochs=epochs,
     callbacks=[checkpoint, early_stopping, reduce_on_plateau],
     verbose=1

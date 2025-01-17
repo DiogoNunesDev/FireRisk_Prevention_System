@@ -47,18 +47,12 @@ def display_images(image_path, mask_path):
     plt.title('Color Mapped Mask')
     plt.axis('off')
 
-    # Display of same mask image but as a color-coded mask
-    plt.subplot(1, 3, 3)
-    plt.imshow(cv2.cvtColor(color_mask, cv2.COLOR_BGR2RGB))
-    plt.title('Classified Mask')
-    plt.axis('off')
-
     # Show the images
     plt.show()
 
 # Example usage:
-image_path = '../Data/Full/Image_54.png'   # Path to the input image
-mask_path = '../Masks/Mask_54.png'         # Path to the corresponding mask
+image_path = '../../Data/Full/Image_35.jpg'   # Path to the input image
+mask_path = '../../Masks/Mask_35.png'         # Path to the corresponding mask
 
 # Call the function
 display_images(image_path, mask_path)

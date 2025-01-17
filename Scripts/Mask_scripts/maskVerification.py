@@ -59,8 +59,8 @@ while True:
 
         image_number = int(image_number)
 
-        image_path = f'../Data/Full/Image_{image_number}.jpg'   
-        mask_path = f'../Masks/Mask_{image_number}.png'         
+        image_path = f'../../Data/Full/Image_{image_number}.jpg'   
+        mask_path = f'../../Masks/Mask_{image_number}.png'         
 
 
         display_images(image_path, mask_path)

@@ -1,3 +1,10 @@
+import os
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import load_model
+import tensorflow as tf
+
 CLASS_MAP = {
     "road": 0,
     "building": 1,
@@ -6,16 +13,9 @@ CLASS_MAP = {
     "water": 4,
 }
 
-import os
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.keras.models import load_model
-import tensorflow as tf
-
 # Paths
-model_path = "unet_final_model_V1.h5" 
-image_path = "../Data/Full/Image_53.jpg" 
+model_path = "../unet_final_model.h5" 
+image_path = "../../Data/Full/Image_63.jpg" 
 
 input_shape = (512, 896, 3)
 alpha = 0.6
@@ -47,6 +47,7 @@ for class_idx, color in enumerate(class_colors):
 
 # Blending the original image with the overlay
 blended = cv2.addWeighted(original_image, 1 - alpha, overlay, alpha, 0)
+cv2.imwrite("output.jpg", cv2.cvtColor(blended, cv2.COLOR_RGB2BGR))
 
 plt.figure(figsize=(15, 5))
 plt.subplot(1, 3, 1)
