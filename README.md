@@ -27,7 +27,7 @@
 
 The U-Net model was chosen for its exceptional performance in image segmentation tasks. Here's a high-level view of the architecture:
 
-![U-Net Model Architecture]("../SkyBlaze/UNet Architecture.jpg")
+![U-Net Model Architecture]("https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/UNet%20Architecture.jpg")
 
 ### Why U-Net?
 
@@ -41,10 +41,10 @@ The U-Net model was chosen for its exceptional performance in image segmentation
 The dataset consists of labeled aerial images, annotated using **LabelMe** for precise segmentation. Here are some examples:
 
 ### Raw Aerial Image
-![Raw Image Example]("../SkyBlaze/Original Image.png")
+![Raw Image Example]("https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/readme/Original%20Image.png")
 
 ### Labeled Data
-![Labeled Image Example]("../SkyBlaze/Mask Labeled Image.png")
+![Labeled Image Example]("https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/readme/Mask%20Labeled%20Image.png")
 
 The dataset enables the model to learn fine-grained distinctions between fire-prone and safe zones.
 
