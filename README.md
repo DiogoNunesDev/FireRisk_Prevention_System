@@ -46,7 +46,7 @@ The dataset consists of labeled aerial images, annotated using **LabelMe** for p
 ### Labeled Data
 ![Labeled Image Example](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/readme/Mask%20Labeled%20Image.png)
 
-The dataset enables the model to learn fine-grained distinctions between fire-prone and safe zones.
+The dataset enables the model to learn fine-grained distinctions between the various components the compose a property.
 
 ---
 
