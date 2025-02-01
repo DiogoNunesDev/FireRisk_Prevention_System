@@ -45,7 +45,12 @@ The U-Net model was chosen for its exceptional performance in image segmentation
 The dataset consists of 41 labeled aerial images, annotated using **LabelMe** for precise segmentation. Here is a example:
 
 ### Classes
-- There are 5 Classes: Building, Vegetation, Water, Road and Material (Fire prone materials)
+- There are 5 Classes: 
+   - Building, 
+   - Vegetation, 
+   - Water, 
+   - Road 
+   - Material (Fire prone materials)
 
 ### Raw Aerial Image
 ![Raw Image Example](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/readme/Original%20Image.png)
