@@ -92,6 +92,7 @@ To ensure reliable predictions, the U-Net model was evaluated using several metr
 
 SkyBlaze will continue to grow with the following planned improvements:
 
+- **Increase Model Precision**: Train the model on a bigger dataset and explore more ways to make it better at extracting each component from the image
 - **Vegetation Dryness Analysis**: Integrating additional data sources to assess vegetation dryness and predict wildfire risk more accurately.
 - **Scalability**: Deploying the system for use across diverse geographical regions.
 
