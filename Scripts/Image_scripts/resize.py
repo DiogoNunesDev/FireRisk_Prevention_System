@@ -1,8 +1,8 @@
 import os
 from PIL import Image
 
-input_folder = "../../Scripts"
-output_folder = "../../Scripts"  
+input_folder = "../../New Data"
+output_folder = "../../New Data"  
 
 os.makedirs(output_folder, exist_ok=True)
 

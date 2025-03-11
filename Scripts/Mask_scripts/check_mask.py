@@ -52,7 +52,7 @@ def display_images(image_path, mask_path):
     plt.show()
 
 # Example usage:
-image_path = '../../Data/Full/Image_1.jpg'   # Path to the input image
+image_path = '../../Data/Full_Data/Image_1.jpg'   # Path to the input image
 mask_path = '../../Masks/Mask_1.png'         # Path to the corresponding mask
 
 # Call the function
