@@ -1,10 +1,8 @@
 import os
 from PIL import Image
 
-input_folder = "../Data/Data_Horizontally_Flipped"
-#input_folder = "../Data/Original"
-#output_folder = "..\\Data\\Data_Vertically_Flipped\\"
-output_folder = "../Data/Data_H_V_Flipped"
+input_folder = "../../Data/Resized_Images"
+output_folder = "../../Data/Full_Data"
 
 os.makedirs(output_folder, exist_ok=True)
 

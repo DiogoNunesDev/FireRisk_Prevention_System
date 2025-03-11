@@ -15,7 +15,7 @@ CLASS_MAP = {
 
 # Paths
 model_path = "../unet_final_model.h5" 
-image_path = "../../Test/test.jpg" 
+image_path = "../../Data/Original/Terrain_52.jpg" 
 
 input_shape = (512, 896, 3)
 alpha = 0.6
