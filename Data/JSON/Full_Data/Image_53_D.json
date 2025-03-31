@@ -3,7 +3,7 @@
     "flags": {},
     "shapes": [
         {
-            "label": "Buiding",
+            "label": "Building",
             "points": [
                 [
                     474.1564245810056,
@@ -373,7 +373,7 @@
             "mask": null
         },
         {
-            "label": "Bare Soil",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     511.58659217877096,
@@ -423,7 +423,7 @@
             "mask": null
         },
         {
-            "label": "Bare Soil",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     288.68156424581,
@@ -497,7 +497,7 @@
             "mask": null
         },
         {
-            "label": "Bare Soil",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     147.89944134078212,

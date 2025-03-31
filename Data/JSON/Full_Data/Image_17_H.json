@@ -543,7 +543,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     146.83333333333337,
@@ -893,7 +893,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     446.27777777777777,
@@ -935,7 +935,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     425.72222222222223,
@@ -1019,7 +1019,7 @@
             "mask": null
         },
         {
-            "label": "Shrubs",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     399.6111111111111,
@@ -1073,7 +1073,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     415.16666666666663,
@@ -1243,7 +1243,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     214.05555555555554,
@@ -1349,7 +1349,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     500.7222222222222,
@@ -1479,7 +1479,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     365.72222222222223,
@@ -2127,7 +2127,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     102.94444444444446,
@@ -2161,7 +2161,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     96.27777777777771,
@@ -2469,7 +2469,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     485.16666666666663,

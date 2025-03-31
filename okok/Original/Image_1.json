@@ -1,9 +1,9 @@
 {
-  "version": "5.5.0",
+  "version": "5.6.1",
   "flags": {},
   "shapes": [
     {
-      "label": "Building",
+      "label": "Unknown",
       "points": [
         [
           80.72222222222223,
@@ -1163,7 +1163,7 @@
       "mask": null
     },
     {
-      "label": "Shrubs",
+      "label": "Grass/Shrubs",
       "points": [
         [
           166.27777777777777,
@@ -1275,7 +1275,7 @@
       "mask": null
     },
     {
-      "label": "Shrubs",
+      "label": "Grass/Shrubs",
       "points": [
         [
           202.94444444444446,
@@ -1333,7 +1333,7 @@
       "mask": null
     },
     {
-      "label": "Shrubs",
+      "label": "Grass/Shrubs",
       "points": [
         [
           384.6111111111111,
@@ -2137,7 +2137,7 @@
       "mask": null
     },
     {
-      "label": "Grass",
+      "label": "Grass/Shrubs",
       "points": [
         [
           342.3888888888889,
@@ -2487,7 +2487,7 @@
       "mask": null
     },
     {
-      "label": "Grass",
+      "label": "Grass/Shrubs",
       "points": [
         [
           361.83333333333337,
@@ -3747,7 +3747,7 @@
       "mask": null
     },
     {
-      "label": "Shrubs",
+      "label": "Grass/Shrubs",
       "points": [
         [
           243.5,
@@ -3773,7 +3773,7 @@
       "mask": null
     },
     {
-      "label": "Shrubs",
+      "label": "Grass/Shrubs",
       "points": [
         [
           266.83333333333337,
@@ -6290,6 +6290,36 @@
         [
           159.61111111111114,
           448.22222222222223
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "polygon",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "Car",
+      "points": [
+        [
+          248.95407098121086,
+          391.54279749478076
+        ],
+        [
+          250.72860125260962,
+          413.4634655532359
+        ],
+        [
+          250.72860125260962,
+          422.12734864300626
+        ],
+        [
+          256.88726513569935,
+          422.4405010438413
+        ],
+        [
+          256.3653444676409,
+          391.0208768267223
         ]
       ],
       "group_id": null,

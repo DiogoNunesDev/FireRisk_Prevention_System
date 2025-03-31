@@ -1,5 +1,5 @@
 {
-  "version": "5.5.0",
+  "version": "5.6.1",
   "flags": {},
   "shapes": [
     {
@@ -11398,6 +11398,88 @@
         [
           78.14285714285717,
           185.28571428571428
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "polygon",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "Car",
+      "points": [
+        [
+          261.1,
+          210.2
+        ],
+        [
+          265.5,
+          230.2
+        ],
+        [
+          272.9,
+          228.5
+        ],
+        [
+          269.9,
+          209.3
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "polygon",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "Car",
+      "points": [
+        [
+          276.5,
+          225.2
+        ],
+        [
+          279.1,
+          244.2
+        ],
+        [
+          287.8,
+          242.3
+        ],
+        [
+          283.9,
+          224.0
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "polygon",
+      "flags": {},
+      "mask": null
+    },
+    {
+      "label": "Unknown",
+      "points": [
+        [
+          158.5,
+          204.7
+        ],
+        [
+          170.3,
+          191.8
+        ],
+        [
+          174.3,
+          197.6
+        ],
+        [
+          166.4,
+          209.6
+        ],
+        [
+          158.4,
+          207.6
         ]
       ],
       "group_id": null,

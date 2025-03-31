@@ -3,7 +3,7 @@
   "flags": {},
   "shapes": [
     {
-      "label": "Buiding",
+      "label": "Building",
       "points": [
         [
           54.60335195530726,
@@ -85,7 +85,7 @@
       "mask": null
     },
     {
-      "label": "Buiding",
+      "label": "Building",
       "points": [
         [
           358.5139664804469,
