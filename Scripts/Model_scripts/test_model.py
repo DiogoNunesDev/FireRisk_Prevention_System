@@ -15,7 +15,7 @@ CLASS_MAP = {
 
 # Paths
 model_path = "../unet_final_model.h5" 
-image_path = "../../Data/Original/Terrain_52.jpg" 
+image_path = "../../../SK/Resized_Images/House_29.jpg" 
 
 input_shape = (512, 896, 3)
 alpha = 0.6
@@ -32,6 +32,7 @@ class_colors = [
 model = load_model(model_path, compile=False)
 
 image = cv2.imread(image_path)
+
 original_image = cv2.resize(image, (input_shape[1], input_shape[0])) 
 image = cv2.resize(image, (input_shape[1], input_shape[0])) 
 image = image / 255.0  

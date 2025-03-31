@@ -3,7 +3,7 @@
   "flags": {},
   "shapes": [
     {
-      "label": "Buiding",
+      "label": "Building",
       "points": [
         [
           242.87150837988824,
@@ -49,7 +49,7 @@
       "mask": null
     },
     {
-      "label": "Buiding",
+      "label": "Building",
       "points": [
         [
           71.92178770949718,
@@ -91,7 +91,7 @@
       "mask": null
     },
     {
-      "label": "Buiding",
+      "label": "Building",
       "points": [
         [
           102.08938547486034,
@@ -117,7 +117,7 @@
       "mask": null
     },
     {
-      "label": "Buiding",
+      "label": "Unknown",
       "points": [
         [
           214.9385474860335,
@@ -151,7 +151,7 @@
       "mask": null
     },
     {
-      "label": "Buiding",
+      "label": "Unknown",
       "points": [
         [
           262.98324022346367,

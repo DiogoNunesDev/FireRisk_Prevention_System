@@ -1,5 +1,5 @@
 {
-    "version": "5.5.0",
+    "version": "5.6.1",
     "flags": {},
     "shapes": [
         {
@@ -685,7 +685,7 @@
             "mask": null
         },
         {
-            "label": "Shrubs",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     345.16666666666663,
@@ -951,7 +951,7 @@
             "mask": null
         },
         {
-            "label": "Shrubs",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     85.16666666666669,
@@ -1647,7 +1647,7 @@
             "mask": null
         },
         {
-            "label": "Shrubs",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     105.72222222222223,
@@ -2787,7 +2787,7 @@
             "mask": null
         },
         {
-            "label": "Shrubs",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     0.7222222222222285,
@@ -3295,7 +3295,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     126.27777777777777,
@@ -3329,7 +3329,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     142.94444444444446,
@@ -4803,7 +4803,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     170.16666666666669,
@@ -4993,7 +4993,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     123.5,
@@ -5123,7 +5123,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     181.83333333333337,
@@ -5189,7 +5189,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     258.5,
@@ -5247,7 +5247,7 @@
             "mask": null
         },
         {
-            "label": "Shrubs",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     199.61111111111114,
@@ -5575,7 +5575,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     152.94444444444446,
@@ -5661,7 +5661,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     141.83333333333337,
@@ -5743,7 +5743,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     191.83333333333337,
@@ -5769,7 +5769,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     241.83333333333337,
@@ -5831,7 +5831,7 @@
             "mask": null
         },
         {
-            "label": "Shrubs",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     246.27777777777777,
@@ -5907,7 +5907,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     257.3888888888889,
@@ -5957,7 +5957,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     122.38888888888891,
@@ -6167,7 +6167,7 @@
             "mask": null
         },
         {
-            "label": "Grass",
+            "label": "Grass/Shrubs",
             "points": [
                 [
                     200.72222222222223,
@@ -6240,6 +6240,90 @@
                 [
                     209.05555555555554,
                     276.0
+                ]
+            ],
+            "group_id": null,
+            "description": "",
+            "shape_type": "polygon",
+            "flags": {},
+            "mask": null
+        },
+        {
+            "label": "Bare Soil",
+            "points": [
+                [
+                    36.665467625899296,
+                    167.24100719424462
+                ],
+                [
+                    84.32733812949641,
+                    141.70143884892087
+                ],
+                [
+                    85.22661870503599,
+                    159.3273381294964
+                ],
+                [
+                    97.63669064748203,
+                    162.20503597122303
+                ],
+                [
+                    108.60791366906476,
+                    161.4856115107914
+                ],
+                [
+                    114.90287769784173,
+                    165.4424460431655
+                ],
+                [
+                    96.73741007194246,
+                    174.07553956834533
+                ],
+                [
+                    97.63669064748203,
+                    177.85251798561148
+                ],
+                [
+                    82.7086330935252,
+                    182.70863309352518
+                ],
+                [
+                    78.39208633093527,
+                    165.80215827338128
+                ],
+                [
+                    40.26258992805757,
+                    169.93884892086328
+                ]
+            ],
+            "group_id": null,
+            "description": "",
+            "shape_type": "polygon",
+            "flags": {},
+            "mask": null
+        },
+        {
+            "label": "Building",
+            "points": [
+                [
+                    88.28417266187051,
+                    200.87410071942446
+                ],
+                [
+                    84.68705035971225,
+                    183.78776978417267
+                ],
+                [
+                    97.63669064748203,
+                    180.19064748201436
+                ],
+                [
+                    102.4928057553957,
+                    185.04676258992805
+                ],
+                [
+                    100.87410071942448,
+                    193.6798561151079
                 ]
             ],
             "group_id": null,

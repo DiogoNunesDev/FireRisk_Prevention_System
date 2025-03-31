@@ -24,12 +24,12 @@ strategy = tf.distribute.MirroredStrategy( GPUS )
 print('Number of devices: %d' % strategy.num_replicas_in_sync)
 
 # Constants
-input_shape = (512, 896, 3) 
-n_labels = 5
+input_shape = (512, 512, 3) 
+n_labels = 6
 batch_size = 1
-epochs = 400
+epochs = 2000
 learning_rate =1e-4
-class_weights = tf.constant([0.0589, 0.0492, 0.0063, 0.7062, 0.1794], dtype=tf.float32)
+#class_weights = tf.constant([0.0589, 0.0492, 0.0063, 0.7062, 0.1794], dtype=tf.float32)
 
 
 # Data Preparation
@@ -56,10 +56,12 @@ def load_data(images_path, masks_path, image_size):
     masks = to_categorical(masks, num_classes=n_labels)
     return images, masks
 
-images_path = '../Data/Full'
-masks_path = '../Masks'
-X, y = load_data(images_path, masks_path, (input_shape[1], input_shape[0]))
-X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.05, random_state=42)
+images_path_train = '../../Data/Train/images'
+masks_path_train = '../../Data/Train/masks'
+images_path_val = '../../Data/Val/images'
+masks_path_val = '../../Data/Val/masks'
+X_train, y_train = load_data(images_path_train, masks_path_train, (input_shape[1], input_shape[0]))
+X_val, y_val = load_data(images_path_val, masks_path_val, (input_shape[1], input_shape[0]))
 
 
 def weighted_categorical_crossentropy(class_weights):
@@ -102,10 +104,10 @@ def dice_loss(y_true, y_pred, smooth=1e-6):
 
 # Model Setup
 with strategy.scope(): 
-    #model = diResUnet(input_shape=input_shape, num_classes=n_labels)
-    model = unet_v2(input_shape=input_shape, num_classes=n_labels)
+    model = diResUnet(input_shape=input_shape, num_classes=n_labels)
+    #model = unet_v2(input_shape=input_shape, num_classes=n_labels)
     #model = unet(input_shape=input_shape, num_classes=n_labels)
-    model = deeplabv3_plus(input_shape=input_shape, num_classes=n_labels)
+    #model = deeplabv3_plus(input_shape=input_shape, num_classes=n_labels)
     model.compile(optimizer=Adam(learning_rate=learning_rate), loss=dice_loss, metrics=['accuracy', iou_metric])
 
 # Callbacks

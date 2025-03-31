@@ -34,7 +34,7 @@ def decoder_block(inputs, skip_connection, filters, target_height, target_width)
     return x
 
 
-def deeplabv3_plus(input_shape=(512, 896, 3), num_classes=5):
+def deeplabv3_plus(input_shape=(512, 512, 3), num_classes=5):
     inputs = Input(shape=input_shape)
     
     x = encoder_block(inputs, 64, strides=2)
@@ -44,7 +44,7 @@ def deeplabv3_plus(input_shape=(512, 896, 3), num_classes=5):
     aspp = aspp_block(x, 256)
     
     low_level_features = encoder_block(inputs, 48)  
-    decoder = decoder_block(aspp, low_level_features, 256, target_height=512, target_width=896)
+    decoder = decoder_block(aspp, low_level_features, 256, target_height=512, target_width=512)
     
     outputs = Conv2D(num_classes, 1, activation='softmax', padding='same')(decoder)
     

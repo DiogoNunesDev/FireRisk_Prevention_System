@@ -32,6 +32,6 @@ def process_masks_in_folder(folder_path):
 
         cv2.imwrite(mask_path, updated_mask)
 
-folder_path = "../Masks"
+folder_path = "../../Data/Masks/Full_Data"
 
 process_masks_in_folder(folder_path)

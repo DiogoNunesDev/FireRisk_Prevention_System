@@ -1,0 +1,6 @@
+train: C:/Users/diogo/OneDrive/Ambiente de Trabalho/SkyBlaze/Data/Train
+val: C:/Users/diogo/OneDrive/Ambiente de Trabalho/SkyBlaze/Data/Val
+
+nc: 6  # Number of classes
+names: ["Road", "Tree", "Grass/Shrubs", "Building", "Water", "Bare Soil"]
+task: segment
