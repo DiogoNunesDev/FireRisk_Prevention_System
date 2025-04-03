@@ -57,9 +57,9 @@ def load_data(images_path, masks_path, image_size):
     return images, masks
 
 images_path_train = '../../Data/Train/images'
-masks_path_train = '../../Data/Train/masks'
+masks_path_train = '../../Data/Train/Masks'
 images_path_val = '../../Data/Val/images'
-masks_path_val = '../../Data/Val/masks'
+masks_path_val = '../../Data/Val/Masks'
 X_train, y_train = load_data(images_path_train, masks_path_train, (input_shape[1], input_shape[0]))
 X_val, y_val = load_data(images_path_val, masks_path_val, (input_shape[1], input_shape[0]))
 
@@ -104,16 +104,16 @@ def dice_loss(y_true, y_pred, smooth=1e-6):
 
 # Model Setup
 with strategy.scope(): 
-    model = diResUnet(input_shape=input_shape, num_classes=n_labels)
+    #model = diResUnet(input_shape=input_shape, num_classes=n_labels)
     #model = unet_v2(input_shape=input_shape, num_classes=n_labels)
-    #model = unet(input_shape=input_shape, num_classes=n_labels)
+    model = unet(input_shape=input_shape, num_classes=n_labels)
     #model = deeplabv3_plus(input_shape=input_shape, num_classes=n_labels)
     model.compile(optimizer=Adam(learning_rate=learning_rate), loss=dice_loss, metrics=['accuracy', iou_metric])
 
 # Callbacks
 checkpoint = ModelCheckpoint('unet_best_model.h5', monitor='val_loss', save_best_only=True, verbose=1)
-early_stopping = EarlyStopping(patience=50, verbose=1)
-reduce_on_plateau = tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", factor=0.2, patience=5, verbose=1, mode="max", min_lr=1e-6)
+early_stopping = EarlyStopping(patience=100, verbose=1)
+reduce_on_plateau = tf.keras.callbacks.ReduceLROnPlateau(monitor="val_loss", factor=0.2, patience=10, verbose=1, mode="max", min_lr=1e-6)
 
 # Training
 history = model.fit(
