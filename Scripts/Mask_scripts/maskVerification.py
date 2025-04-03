@@ -11,8 +11,6 @@ CLASS_COLORS = {
     4: (125, 0, 125),    # Building (Purple)
     5: (0, 0, 255),      # Water (Blue)
     6: (139, 69, 19),    # Bare Soil (Brown)
-    7: (169, 169, 169),  # Car (Gray)
-    8: (255, 255, 255)   # Unknown (White)
 }
 
 def create_colored_mask(mask):
