@@ -9,8 +9,6 @@ label_map = {
     4: "Building",
     5: "Water",
     6: "Bare Soil",
-    7: "Car",
-    8: "Unknown"
 }
 
 def mask_to_yolo_segmentation(mask_path, output_txt_path):
@@ -26,15 +24,15 @@ def mask_to_yolo_segmentation(mask_path, output_txt_path):
 
     with open(output_txt_path, "w") as f:
         for label in unique_labels:
-            if label == 0 or label > 8:
-                continue  # Skip background and out-of-range labels
+            if label == 0 or label not in label_map:
+                continue  
             
             mask_binary = (mask == label).astype(np.uint8)
-            contours, _ = cv2.findContours(mask_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contours, _ = cv2.findContours(mask_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
             for contour in contours:
                 if len(contour) < 3:
-                    continue  # Ignore invalid contours
+                    continue 
                 
                 points = []
                 for point in contour:
@@ -59,11 +57,9 @@ def process_masks(mask_dir, output_txt_dir):
         txt_output_path = os.path.join(output_txt_dir, mask_file.replace(".png", ".txt"))
         mask_to_yolo_segmentation(mask_path, txt_output_path)
 
-# Set directories
-mask_directory = "../../Data/Masks/Full_Data"  # Replace with actual directory containing masks
+mask_directory = "../../Data/Masks/Full_Data"  
 yolo_output_directory = "../../Data/Yolo_Labels/labels"
 
-# Convert mask images to YOLO segmentation format
 process_masks(mask_directory, yolo_output_directory)
 
 print("Conversion to YOLO segmentation format complete.")

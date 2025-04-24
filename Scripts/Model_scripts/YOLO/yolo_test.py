@@ -12,14 +12,13 @@ CLASS_COLORS = {
     3: (255, 0, 0),      # Building: Red
     4: (0, 255, 255),    # Water: Cyan
     5: (255, 255, 0),    # Bare Soil: Yellow
-    6: (255, 255, 255)   # Unknown (Background): White
 }
 
 # YOLO class names
-CLASS_NAMES = ["Road", "Tree", "Grass/Shrubs", "Building", "Water", "Bare Soil", "Car", "Unknown"]
+CLASS_NAMES = ["Road", "Tree", "Grass/Shrubs", "Building", "Water", "Bare Soil"]
 
 # Load YOLO model
-model = YOLO("../../../runs/segment/train/weights/best.pt")
+model = YOLO("../YOLO/runs/segment/train/weights/last.pt")
 
 # Function to load image using PIL and convert it to RGB
 def load_image(image_path):
@@ -30,7 +29,7 @@ def load_image(image_path):
     return np.array(image)  # Convert to NumPy array
 
 # Define image path
-image_path = "../../../Data/Val/images/Image_10.jpg"
+image_path = "../../../Data/Val/images/Image_16.jpg"
 original_image = load_image(image_path)
 
 # Run YOLO inference **without resizing**

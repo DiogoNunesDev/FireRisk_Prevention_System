@@ -6,7 +6,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
-from unet import unet
+from unet import UNet
 from unet2 import unet as unet_v2
 from DIResUnet import diResUnet
 from deeplabv3_plus import deeplabv3_plus
@@ -22,6 +22,11 @@ if gpus:
 GPUS = ["GPU:0", "GPU:1"]
 strategy = tf.distribute.MirroredStrategy( GPUS )
 print('Number of devices: %d' % strategy.num_replicas_in_sync)
+
+from tensorflow.keras import mixed_precision
+
+policy = mixed_precision.Policy('mixed_float16')
+mixed_precision.set_global_policy(policy)
 
 # Constants
 input_shape = (512, 512, 3) 
@@ -104,11 +109,11 @@ def dice_loss(y_true, y_pred, smooth=1e-6):
 
 # Model Setup
 with strategy.scope(): 
-    model = diResUnet(input_shape=input_shape, num_classes=n_labels)
+    #model = diResUnet(input_shape=input_shape, num_classes=n_labels)
     #model = unet_v2(input_shape=input_shape, num_classes=n_labels)
-    #model = unet(input_shape=input_shape, num_classes=n_labels)
+    model = UNet(input_shape=input_shape, num_classes=n_labels)
     #model = deeplabv3_plus(input_shape=input_shape, num_classes=n_labels)
-    model.compile(optimizer=Adam(learning_rate=learning_rate), loss=dice_loss, metrics=['accuracy', iou_metric])
+    model.compile(optimizer=Adam(learning_rate=learning_rate), loss="sparse_categorical_crossentropy", metrics=['accuracy', iou_metric])
 
 # Callbacks
 checkpoint = ModelCheckpoint('unet_best_model.h5', monitor='val_loss', save_best_only=True, verbose=1)

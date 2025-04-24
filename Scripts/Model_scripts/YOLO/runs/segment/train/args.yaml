@@ -1,6 +1,6 @@
 task: segment
 mode: train
-model: ./yolo11n-seg.pt
+model: ./yolo11m-seg.pt
 data: ./data.yaml
 epochs: 2000
 time: null
