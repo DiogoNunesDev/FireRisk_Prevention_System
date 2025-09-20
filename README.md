@@ -58,10 +58,6 @@ SkyBlaze uses **DeepLabV3+**, a leading architecture for semantic segmentation, 
 
 **Raw Aerial Image**  
 ![Raw Image](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/readme/Original%20Image.png)  
-
-**Labeled Segmentation Mask**  
-![Labeled Image](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/readme/Mask%20Labeled%20Image.png)  
-
 ---
 
 ## Training Process
