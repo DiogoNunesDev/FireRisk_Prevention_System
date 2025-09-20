@@ -1,65 +1,77 @@
-import tensorflow as tf
-from tensorflow.keras import layers, models
+import torch
+import torch.nn as nn
 
-def UNet(input_size=(512, 512, 3), num_classes=6):
-    # Input layer
-    inputs = layers.Input(input_size)
+class UNet(nn.Module):
+    def __init__(self, in_channels=3, num_classes=7):
+        super(UNet, self).__init__()
 
-    # Encoder (Contracting Path)
-    # Block 1
-    c1 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(inputs)
-    c1 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(c1)
-    p1 = layers.MaxPooling2D((2, 2))(c1)
+        def conv_block(in_c, out_c):
+            return nn.Sequential(
+                nn.Conv2d(in_c, out_c, kernel_size=3, padding=1),
+                nn.BatchNorm2d(out_c),
+                nn.LeakyReLU(inplace=True),
+                nn.Conv2d(out_c, out_c, kernel_size=3, padding=1),
+                nn.BatchNorm2d(out_c),
+                nn.LeakyReLU(inplace=True),
+            )
 
-    # Block 2
-    c2 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(p1)
-    c2 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(c2)
-    p2 = layers.MaxPooling2D((2, 2))(c2)
+        self.enc1 = conv_block(in_channels, 64)
+        self.pool1 = nn.MaxPool2d(2)
 
-    # Block 3
-    c3 = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(p2)
-    c3 = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(c3)
-    p3 = layers.MaxPooling2D((2, 2))(c3)
+        self.enc2 = conv_block(64, 128)
+        self.pool2 = nn.MaxPool2d(2)
 
-    # Block 4
-    c4 = layers.Conv2D(512, (3, 3), activation='relu', padding='same')(p3)
-    c4 = layers.Conv2D(512, (3, 3), activation='relu', padding='same')(c4)
-    p4 = layers.MaxPooling2D((2, 2))(c4)
+        self.enc3 = conv_block(128, 256)
+        self.pool3 = nn.MaxPool2d(2)
 
-    # Bottleneck
-    c5 = layers.Conv2D(1024, (3, 3), activation='relu', padding='same')(p4)
-    c5 = layers.Conv2D(1024, (3, 3), activation='relu', padding='same')(c5)
+        self.enc4 = conv_block(256, 512)
+        self.pool4 = nn.MaxPool2d(2)
 
-    # Decoder (Expanding Path)
-    # Block 1
-    u6 = layers.UpSampling2D((2, 2))(c5)
-    u6 = layers.concatenate([u6, c4], axis=-1)
-    c6 = layers.Conv2D(512, (3, 3), activation='relu', padding='same')(u6)
-    c6 = layers.Conv2D(512, (3, 3), activation='relu', padding='same')(c6)
+        self.bottleneck = conv_block(512, 1024)
 
-    # Block 2
-    u7 = layers.UpSampling2D((2, 2))(c6)
-    u7 = layers.concatenate([u7, c3], axis=-1)
-    c7 = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(u7)
-    c7 = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(c7)
+        self.upconv4 = nn.ConvTranspose2d(1024, 512, kernel_size=2, stride=2)
+        self.dec4 = conv_block(1024, 512)
 
-    # Block 3
-    u8 = layers.UpSampling2D((2, 2))(c7)
-    u8 = layers.concatenate([u8, c2], axis=-1)
-    c8 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(u8)
-    c8 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(c8)
+        self.upconv3 = nn.ConvTranspose2d(512, 256, kernel_size=2, stride=2)
+        self.dec3 = conv_block(512, 256)
 
-    # Block 4
-    u9 = layers.UpSampling2D((2, 2))(c8)
-    u9 = layers.concatenate([u9, c1], axis=-1)
-    c9 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(u9)
-    c9 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(c9)
+        self.upconv2 = nn.ConvTranspose2d(256, 128, kernel_size=2, stride=2)
+        self.dec2 = conv_block(256, 128)
 
-    # Output layer (6 classes for multi-class segmentation)
-    outputs = layers.Conv2D(num_classes, (1, 1), activation='softmax')(c9)
+        self.upconv1 = nn.ConvTranspose2d(128, 64, kernel_size=2, stride=2)
+        self.dec1 = conv_block(128, 64)
 
-    # Define the model
-    model = models.Model(inputs=inputs, outputs=outputs)
+        self.final_conv = nn.Conv2d(64, num_classes, kernel_size=1)
 
-    return model
+    def forward(self, x):
+        c1 = self.enc1(x)
+        p1 = self.pool1(c1)
 
+        c2 = self.enc2(p1)
+        p2 = self.pool2(c2)
+
+        c3 = self.enc3(p2)
+        p3 = self.pool3(c3)
+
+        c4 = self.enc4(p3)
+        p4 = self.pool4(c4)
+
+        bn = self.bottleneck(p4)
+
+        u4 = self.upconv4(bn)
+        u4 = torch.cat([u4, c4], dim=1)
+        c5 = self.dec4(u4)
+
+        u3 = self.upconv3(c5)
+        u3 = torch.cat([u3, c3], dim=1)
+        c6 = self.dec3(u3)
+
+        u2 = self.upconv2(c6)
+        u2 = torch.cat([u2, c2], dim=1)
+        c7 = self.dec2(u2)
+
+        u1 = self.upconv1(c7)
+        u1 = torch.cat([u1, c1], dim=1)
+        c8 = self.dec1(u1)
+
+        return self.final_conv(c8)  # Logits (sem softmax)

@@ -1,77 +1,76 @@
 import os
 import cv2
 import numpy as np
+import torch
 import matplotlib.pyplot as plt
-from tensorflow.keras.models import load_model
-import tensorflow as tf
+from unet import UNet  # Importa o teu UNet em PyTorch
+from deeplabv3_plus import DeepLabV3Plus
+from hrnet import HRNetSegmentation
 
-CLASS_MAP = {
-    "Road": 0, "Tree": 1, "Grass/Shrubs": 2, "Building": 3, "Water": 4, "Bare Soil": 5
-}
 
-# Paths
-model_path = "../unet_final_model.h5"
-image_path = "../../Test/test_2.jpg"
+model_path = "./deeplab_best_iou_model.pth"
+#model_path = "./deeplab_final_model.pth"
+image_path = "../../Test/image.png"
+image_path = "C:\\Users\\diogo\\OneDrive\\Ambiente de Trabalho\\SkyBlaze\\readme\\Original Image.png"
+output_path = "../../Test/output.jpg"
+mask_output_path = "../../Test/pred_mask.png"
 
-input_shape = (512, 896, 3)
-alpha = 0.9
+input_shape = (512, 512)
+alpha = 0.8
+n_labels = 7 
 
-# Updated class colors to match your specification
 class_colors = {
-    0: (0, 0, 255),        # Road
-    1: (0, 255, 0),        # Tree
-    2: (255, 255, 0),      # Grass/Shrubs
-    3: (125, 0, 125),      # Building
-    4: (255, 0, 0),        # Water
-    5: (0, 255, 255),      # Bare Soil
+    0: (0, 0, 0),        # Unassigned pixels (Black)
+    1: (255, 0, 0),      # Road (Red)
+    2: (0, 255, 0),      # Tree (Green)
+    3: (144, 238, 144),  # Grass/Shrubs (Light Green)
+    4: (125, 0, 125),    # Building (Purple)
+    5: (0, 0, 255),      # Water (Blue) 
+    6: (19, 69, 139),    # Bare Soil (Brown)
 }
 
-model = load_model(model_path, compile=False)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+#model = UNet(in_channels=3, num_classes=n_labels)
+model = DeepLabV3Plus(num_classes=n_labels).to(device)
+#model = HRNetSegmentation(num_classes=n_labels, pretrained=True).to(device)
+model.load_state_dict(torch.load(model_path, map_location=device))
+model.to(device)
+model.eval()
 
 image = cv2.imread(image_path)
+original_image = cv2.resize(image, (input_shape[1], input_shape[0]))
+image_resized = original_image.astype(np.float32) / 255.0
+image_tensor = torch.tensor(np.transpose(image_resized, (2, 0, 1)), dtype=torch.float32).unsqueeze(0).to(device)
 
-# Resize the image to match the model's input size
-original_image = cv2.resize(image, (input_shape[1], input_shape[0])) 
-image = cv2.resize(image, (input_shape[1], input_shape[0])) 
-image = image / 255.0  # Normalize
-image = np.expand_dims(image, axis=0)  # Add batch dimension
+with torch.no_grad():
+    output = model(image_tensor)
+    pred_mask = torch.argmax(output.squeeze(), dim=0).cpu().numpy()
 
-# Make prediction
-pred = model.predict(image)[0]
-pred_mask = np.argmax(pred, axis=-1)  # Get the class with the highest probability
-
-# Create an empty overlay image
-overlay = np.zeros_like(original_image, dtype=np.uint8)
-
-# Assign colors to the overlay image based on predicted mask
+colored_mask = np.zeros_like(original_image, dtype=np.uint8)
 for class_idx, color in class_colors.items():
-    overlay[pred_mask == class_idx] = color
+    colored_mask[pred_mask == class_idx] = color
 
-# Blend the original image with the overlay using the alpha value
-blended = cv2.addWeighted(original_image, 1 - alpha, overlay, alpha, 0)
+blended = cv2.addWeighted(original_image, 1 - alpha, colored_mask, alpha, 0)
 
-# Save the output image
-cv2.imwrite("../../Test/output.jpg", cv2.cvtColor(blended, cv2.COLOR_RGB2BGR))
+cv2.imwrite(output_path, cv2.cvtColor(blended, cv2.COLOR_BGR2RGB))
+cv2.imwrite(mask_output_path, colored_mask)
 
-# Display the results
 plt.figure(figsize=(15, 5))
 
-# Original Image
 plt.subplot(1, 3, 1)
 plt.title("Original Image")
-plt.imshow(original_image)
+plt.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
-# Predicted Mask
 plt.subplot(1, 3, 2)
 plt.title("Predicted Mask")
-plt.imshow(pred_mask, cmap="gray")
+plt.imshow(cv2.cvtColor(colored_mask, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
-# Overlayed Image
 plt.subplot(1, 3, 3)
 plt.title("Overlay")
-plt.imshow(blended)
+plt.imshow(cv2.cvtColor(blended, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.tight_layout()
