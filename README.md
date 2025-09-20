@@ -30,7 +30,7 @@ The model segments images into the following classes:
 ## Results Showcase
 
 ### Input Aerial Image
-![Input Example](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/Test/test.jpg)
+![Input Example](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/Test/image.png)
 
 ### Predicted Segmentation
 ![Output Example](https://github.com/DiogoNunesDev/FireRisk_Prevention_System/blob/main/Test/output.jpg)
@@ -50,9 +50,9 @@ SkyBlaze uses **DeepLabV3+**, a leading architecture for semantic segmentation, 
 
 ## The Dataset
 
-- **41 labeled aerial images** from Portuguese properties.  
+- **102 labeled aerial images** from properties.  
 - Annotated with **LabelMe** to create pixel-wise segmentation masks.  
-- Data Augmentation applied: rotations, flips, scaling.  
+- Data Augmentation applied: rotations and flips.  
 
 ### Example
 
